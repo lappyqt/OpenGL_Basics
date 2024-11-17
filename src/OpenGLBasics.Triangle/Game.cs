@@ -18,13 +18,6 @@ public class Game(int width, int height, string title) : GameWindow(GameWindowSe
     private int _vertexArrayObject;
     private Shader? _shader;
 
-    private void DrawTriangle()
-    {
-        _shader!.Use();
-        GL.BindVertexArray(_vertexArrayObject);
-        GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
-    }
-
     protected override void OnLoad()
     {
         base.OnLoad();
@@ -68,5 +61,12 @@ public class Game(int width, int height, string title) : GameWindow(GameWindowSe
     {
         base.OnFramebufferResize(e);
         GL.Viewport(0, 0, e.Width, e.Height);
+    }
+
+    private void DrawTriangle()
+    {
+        _shader!.Use();
+        GL.BindVertexArray(_vertexArrayObject);
+        GL.DrawArrays(PrimitiveType.Triangles, 0, 3);
     }
 }

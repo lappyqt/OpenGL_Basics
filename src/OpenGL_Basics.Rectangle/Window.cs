@@ -17,8 +17,8 @@ public class Window : GameWindow
 
     private readonly uint[] indices = 
     [
-        0, 2, 3, // first triagle
-        0, 1, 3 // second triagle
+        0, 2, 3, // first triangle
+        0, 1, 3 // second triangle
     ];
 
     int vertexBufferObject;
