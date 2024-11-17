@@ -1,10 +1,12 @@
 using OpenTK.Graphics.ES30;
 
-public class Shader : IDisposable
-{
-    private bool disposedValue = false;
+namespace OpenGLBasics.Triangle;
 
-    private int Handle;
+public sealed class Shader : IDisposable
+{
+    private bool _disposedValue = false;
+
+    public int Handle;
 
     public Shader(string vertexPath, string fragmentPath)
     {
@@ -43,7 +45,7 @@ public class Shader : IDisposable
 
         if (vertexSuccess == 0)
         {
-            throw new Exception(GL.GetShaderInfoLog(vertexShader));
+            throw new Exception($"Vertex shader: {GL.GetShaderInfoLog(vertexShader)}");
         }
 
         GL.CompileShader(fragmentShader);
@@ -51,7 +53,7 @@ public class Shader : IDisposable
 
         if (fragmentSuccess == 0)
         {
-            throw new Exception(GL.GetShaderInfoLog(fragmentShader));
+            throw new Exception($"Fragment shader: {GL.GetShaderInfoLog(fragmentShader)}");
         }
 
         Handle = GL.CreateProgram();
@@ -73,12 +75,12 @@ public class Shader : IDisposable
         GL.DeleteShader(fragmentShader);
     }
 
-    protected virtual void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
-        if (!disposedValue)
+        if (!_disposedValue)
         {
             GL.DeleteProgram(Handle);
-            disposedValue = true;
+            _disposedValue = true;
         }
     }
 
